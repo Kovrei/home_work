@@ -7,7 +7,7 @@
 Добейтесь стабильной работы всех системных контейнеров.  
 # Задание 2
 Есть файл с деплоем:
-'''java
+```java
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -30,7 +30,7 @@ spec:
            value: password123
         ports:
         - containerPort: 6379
-'''
+```  
 Выполните действия:  
 
 Измените файл с учётом условий:  
@@ -48,12 +48,12 @@ redis должен запускаться без пароля;
 проброса порта локальной машины в контейнер для отладки.  
 # Задание 4
 Есть конфигурация nginx:  
-java'''
+java```
 location / {
     add_header Content-Type text/plain;
     return 200 'Hello from k8s';
 }
-'''
+```
 
 Выполните действия:  
 
