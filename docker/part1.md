@@ -61,6 +61,7 @@ EXPOSE 80/tcp
 # Запускаем апач
 CMD apachectl -D FOREGROUND
 ```
+```
 nano ./index.html
 ```
 ```
