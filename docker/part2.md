@@ -5,6 +5,27 @@
 
 Установите Docker Compose и опишите, для чего он нужен и как может улучшить вашу жизнь.
 
+### Добавьте официальный GPG-ключ Docker:
+```
+apt sudo-получить обновление
+sudo apt-получить install ca-сертификаты curl
+sudo install -m 0755 -d /etc/apt/брелоки для ключей
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/брелоки/docker.asc
+sudo chmod a+r /etc/apt/брелоки/docker.asc
+```
+
+### Add the repository to Apt sources:
+```
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+```
+```
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
 # Задание 2
 Выполните действия и приложите текст конфига на этом этапе.
 
@@ -15,6 +36,25 @@ services;
 volumes;
 networks.
 При выполнении задания используйте подсеть 10.5.0.0/16. Ваша подсеть должна называться: <ваши фамилия и инициалы>-my-netology-hw. Все приложения из последующих заданий должны находиться в этой конфигурации.
+
+```
+nano docker-compose.yml
+```
+```
+version: '3'
+
+services:
+
+volumes:
+
+networks:
+  monitoring-stack:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
+```
 
 # Задание 3
 Выполните действия:
