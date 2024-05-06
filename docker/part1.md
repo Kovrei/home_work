@@ -41,10 +41,16 @@ sudo docker rmi ...
 ```
 docker pull httpd
 docker run -dit --name my-apache-app -p 8080:80 -v "$PWD":/usr/local/apache2/htdocs/ httpd:2.4
+#или
+docker run -d --name my-apache-app -p 80:80 httpd:2.4
 ```
-или
+
+## Задание 3
+Создайте свой Docker образ с Apache и подмените стандартную страницу index.html на страницу, содержащую ваши ФИО.
+Запустите ваш образ, откройте страницу http://localhost и убедитесь, что страница изменилась.
 
 ```
+mkdir
 nano Dockerfile
 ```
 ```
@@ -56,6 +62,8 @@ MAINTAINER Test Netology
 LABEL version="1.0"
 # Указываем команду, которая будет выполнена при сборке контейнера
 RUN DEBIAN_FRONTEND="noninteractive" apt install -y tzdata && apt update && apt install -y apache2 nano
+# Копируем файл внутрь нашего контейнера
+COPY ./index.html /usr/local/apache2/htdocs/index.html
 # Включаем возможность прокидывать трафик на 80й TCP порт
 EXPOSE 80/tcp
 # Запускаем апач
@@ -68,11 +76,5 @@ nano ./index.html
 docker build -t netologytest1:1.2 .
 docker run -d -p 80:80 id_созданного_образа
 ```
-
-## Задание 3
-Создайте свой Docker образ с Apache и подмените стандартную страницу index.html на страницу, содержащую ваши ФИО.
-Запустите ваш образ, откройте страницу http://localhost и убедитесь, что страница изменилась.
-
-
 
 
