@@ -5,13 +5,13 @@
 
 Установите Docker Compose и опишите, для чего он нужен и как может улучшить вашу жизнь.
 
-### Добавьте официальный GPG-ключ Docker:
-```
-apt sudo-получить обновление
-sudo apt-получить install ca-сертификаты curl
-sudo install -m 0755 -d /etc/apt/брелоки для ключей
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/брелоки/docker.asc
-sudo chmod a+r /etc/apt/брелоки/docker.asc
+### Add Docker's official GPG key:
+```java
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 ```
 
 ### Add the repository to Apt sources:
