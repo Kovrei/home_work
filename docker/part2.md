@@ -73,7 +73,7 @@ version: '3'
 services:
   prometheus:
     image: prom/prometheus:v2.47.2
-    container_name: prometheus
+    container_name: oau-netology-prometheus
     command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
     ports:
       - 9090:9090
