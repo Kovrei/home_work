@@ -147,7 +147,7 @@ sudo ufw status
 
 ```
 sudo docker compose up -d
-sudo docker compose ls
+sudo docker compose ps
 ```
 
 # Задание 4
@@ -196,12 +196,12 @@ networks:
         - subnet: 10.5.0.0/16
           gateway: 10.5.0.1
 ```
-```
-sudo ufw allow 9191/tcp
-```
+
 ```
 sudo docker compose down
-sudo docker compose up
+sudo docker compose up -d
+sudo docker compose ps
+echo "docker 2" | curl --data-binary @- http://localhost:9091/metrics/job/netology
 ```
 
 # Задание 5
@@ -211,6 +211,47 @@ sudo docker compose up
 Добавьте необходимые тома с данными и конфигурацией (конфигурация лежит в репозитории в директории 6-04/grafana).
 Добавьте переменную окружения с путем до файла с кастомными настройками (должен быть в томе), в самом файле пропишите логин=<ваши фамилия и инициалы> пароль=netology.
 Обеспечьте внешний доступ к порту 3000 c порта 80 докер-сервера.
+
+```
+version: '3'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.47.2
+    container_name: oau-netology-prometheus
+    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    networks:
+      - monitoring-stack
+    restart: always
+    
+  pushgateway:
+    image: prom/pushgateway:v1.6.2
+    container_name: oau-netology-pushgateway
+    ports:
+      - 9091:9091
+    networks:
+      - monitoring-stack
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
+
+networks:
+  monitoring-stack:
+    name: oau-netology-hw
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
+```
 # Задание 6
 Выполните действия.
 
