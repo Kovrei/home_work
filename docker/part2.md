@@ -65,6 +65,7 @@ networks:
 Обеспечьте внешний доступ к порту 9090 c докер-сервера.
 
 ```
+mkdir
 nano docker-compose.yml
 ```
 ```
@@ -97,7 +98,8 @@ networks:
           gateway: 10.5.0.1
 ```
 ```
-nano prometheus.yml
+mkdir -p ./{prometheus,grafana,pushgateway}
+nano prometheus/prometheus.yml
 ```
 ```
 # my global config
@@ -134,7 +136,17 @@ scrape_configs:
       - targets: ["pushgateway:9091"]
 ```
 ```
-sudo docker compose up
+sudo ufw status
+sudo ufw enable
+sudo ufw status
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow 9090/tcp
+sudo ufw status
+```
+
+```
+sudo docker compose up -d
 sudo docker compose ls
 ```
 
@@ -143,6 +155,55 @@ sudo docker compose ls
 
 Создайте конфигурацию docker-compose для Pushgateway с именем контейнера <ваши фамилия и инициалы>-netology-pushgateway.
 Обеспечьте внешний доступ к порту 9091 c докер-сервера.
+
+```
+version: '3'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.47.2
+    container_name: oau-netology-prometheus
+    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    networks:
+      - monitoring-stack
+    restart: always
+    
+  pushgateway:
+    image: prom/pushgateway:v1.6.2
+    container_name: oau-netology-pushgateway
+    ports:
+      - 9091:9091
+    networks:
+      - monitoring-stack
+    depends_on:
+      - prometheus
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
+
+networks:
+  monitoring-stack:
+    name: oau-netology-hw
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+          gateway: 10.5.0.1
+```
+```
+sudo ufw allow 9191/tcp
+```
+```
+sudo docker compose down
+sudo docker compose up
+```
+
 # Задание 5
 Выполните действия:
 
