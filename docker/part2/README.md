@@ -49,73 +49,12 @@ networks:
 mkdir
 nano docker-compose.yml
 ```
-```
-version: '3'
-
-services:
-  prometheus:
-    image: prom/prometheus:v2.47.2
-    container_name: oau-netology-prometheus
-    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
-    ports:
-      - 9090:9090
-    volumes:
-      - ./prometheus:/etc/prometheus
-      - prometheus-data:/prometheus
-    networks:
-      - monitoring-stack
-    restart: always
-
-volumes:
-  prometheus-data:
-
-networks:
-  monitoring-stack:
-    name: oau-netology-hw
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.5.0.0/16
-          gateway: 10.5.0.1
-```
+[docker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/prometheus/docker-compose.prometheus.yml)
 ```
 mkdir -p ./{prometheus,grafana,pushgateway}
 nano prometheus/prometheus.yml
 ```
-```
-# my global config
-global:
-  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
-  # scrape_timeout is set to the global default (10s).
-
-# Alertmanager configuration
-alerting:
-  alertmanagers:
-    - static_configs:
-        - targets:
-            # - alertmanager:9093
-
-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
-rule_files:
-  # - "first_rules.yml"
-  # - "second_rules.yml"
-
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
-scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  # - job_name: "docker-server"
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-  #   static_configs:
-  #     - targets: ["172.17.0.1:9100"]
-
-  - job_name: 'pushgateway'
-    honor_labels: true
-    static_configs:
-      - targets: ["pushgateway:9091"]
-```
+[prometheus.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/prometheus/prometheus.yml)
 ```
 sudo ufw status
 sudo ufw enable
