@@ -93,46 +93,22 @@ echo "docker 2" | curl --data-binary @- http://localhost:9091/metrics/job/netolo
 Добавьте переменную окружения с путем до файла с кастомными настройками (должен быть в томе), в самом файле пропишите логин=<ваши фамилия и инициалы> пароль=netology.
 Обеспечьте внешний доступ к порту 3000 c порта 80 докер-сервера.
 
+
+
 ```
-version: '3'
-
-services:
-  prometheus:
-    image: prom/prometheus:v2.47.2
-    container_name: oau-netology-prometheus
-    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
-    ports:
-      - 9090:9090
-    volumes:
-      - ./prometheus:/etc/prometheus
-      - prometheus-data:/prometheus
-    networks:
-      - monitoring-stack
-    restart: always
-    
-  pushgateway:
-    image: prom/pushgateway:v1.6.2
-    container_name: oau-netology-pushgateway
-    ports:
-      - 9091:9091
-    networks:
-      - monitoring-stack
-    depends_on:
-      - prometheus
-    restart: unless-stopped
-
-volumes:
-  prometheus-data:
-
-networks:
-  monitoring-stack:
-    name: oau-netology-hw
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 10.5.0.0/16
-          gateway: 10.5.0.1
+sudo docker pull grafana/grafana
+sudo docker compose  -f docker-compose.yml -f docker-compose.pushgateway.yml up -d
 ```
+https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/docker-compose.grafana.yml
+```
+mkdir grafana
+nano grafana/[custom.ini](https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/custom.ini)
+nano [docker-compose.grafana.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/docker-compose.grafana.yml)
+sudo docker compose -f docker-compose.yml -f docker-compose.pushgateway.yml -f docker-compose.grafana.yml up -d
+sudo docker compose ps
+```
+
+
 # Задание 6
 Выполните действия.
 
@@ -140,6 +116,8 @@ networks:
 Настройте режимы перезапуска для контейнеров.
 Настройте использование контейнерами одной сети.
 Запустите сценарий в detached режиме.
+
+
 # Задание 7
 Выполните действия.
 
@@ -157,6 +135,11 @@ docker-compose.yml целиком;
 
 Остановите и удалите все контейнеры одной командой.
 В качестве решения приложите скриншот консоли с проделанными действиями.
+
+```
+sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -q) && sudo docker rmi $(sudo docker ps -a -q)
+```
+
 
 # Дополнительные задания* (со звёздочкой)
 Их выполнение необязательное и не влияет на получение зачёта по домашнему заданию. Можете их решить, если хотите лучше разобраться в материале.
