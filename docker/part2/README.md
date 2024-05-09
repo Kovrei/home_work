@@ -102,8 +102,12 @@ sudo docker compose  -f docker-compose.yml -f docker-compose.pushgateway.yml up 
 https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/docker-compose.grafana.yml
 ```
 mkdir grafana
-nano grafana/[custom.ini](https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/custom.ini)
-nano [docker-compose.grafana.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/docker-compose.grafana.yml)
+nano grafana/custom.ini
+nano docker-compose.grafana.yml
+```
+[custom.ini](https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/custom.ini)
+[docker-compose.grafana.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/docker-compose.grafana.yml)
+```
 sudo docker compose -f docker-compose.yml -f docker-compose.pushgateway.yml -f docker-compose.grafana.yml up -d
 sudo docker compose ps
 ```
