@@ -97,10 +97,6 @@ echo "docker 2" | curl --data-binary @- http://localhost:9091/metrics/job/netolo
 
 ```
 sudo docker pull grafana/grafana
-sudo docker compose  -f docker-compose.yml -f docker-compose.pushgateway.yml up -d
-```
-https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/docker-compose.grafana.yml
-```
 mkdir grafana
 nano grafana/custom.ini
 nano docker-compose.grafana.yml
