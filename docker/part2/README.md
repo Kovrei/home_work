@@ -80,7 +80,7 @@ sudo docker compose ps
 
 ```
 sudo docker compose down
-sudo docker compose up -d
+sudo docker compose  -f docker-compose.yml -f docker-compose.pushgateway.yml up -d
 sudo docker compose ps
 echo "docker 2" | curl --data-binary @- http://localhost:9091/metrics/job/netology
 ```
