@@ -18,9 +18,8 @@ volumes;
 networks.
 При выполнении задания используйте подсеть 10.5.0.0/16. Ваша подсеть должна называться: <ваши фамилия и инициалы>-my-netology-hw. Все приложения из последующих заданий должны находиться в этой конфигурации.
 
-```
 nano docker-compose.yml
-```
+
 ```
 version: '3'
 
@@ -45,17 +44,13 @@ networks:
 Добавьте необходимые тома с данными и конфигурацией (конфигурация лежит в репозитории в директории 6-04/prometheus).
 Обеспечьте внешний доступ к порту 9090 c докер-сервера.
 
-```
-mkdir
-nano docker-compose.yml
-```
-[docker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/prometheus/docker-compose.prometheus.yml)
-```
+
+mkdir ...
+nano docker-compose.yml [docker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/prometheus/docker-compose.prometheus.yml)
+
 mkdir -p ./{prometheus,grafana,pushgateway}
-nano prometheus/prometheus.yml
-```
-[prometheus.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/prometheus/prometheus.yml)
-```
+nano prometheus/prometheus.yml[prometheus.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/prometheus/prometheus.yml)
+
 sudo ufw status
 sudo ufw enable
 sudo ufw status
@@ -63,12 +58,12 @@ sudo ufw default deny incoming
 sudo ufw default allow outgoing
 sudo ufw allow 9090/tcp
 sudo ufw status
-```
 
-```
+
+
 sudo docker compose up -d
 sudo docker compose ps
-```
+
 
 # Задание 4
 Выполните действия:
@@ -76,14 +71,14 @@ sudo docker compose ps
 Создайте конфигурацию docker-compose для Pushgateway с именем контейнера <ваши фамилия и инициалы>-netology-pushgateway.
 Обеспечьте внешний доступ к порту 9091 c докер-сервера.
 
-[docker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/pushgateway/docker-compose.prometheus-pushgateway.yml)
+nano docker-compopse.pushgateway.yml[docker-compose.pushgateway.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/pushgateway/docker-compose.prometheus-pushgateway.yml)
 
-```
+
 sudo docker compose down
 sudo docker compose  -f docker-compose.yml -f docker-compose.pushgateway.yml up -d
 sudo docker compose ps
 echo "docker 2" | curl --data-binary @- http://localhost:9091/metrics/job/netology
-```
+
 
 # Задание 5
 Выполните действия:
@@ -95,18 +90,14 @@ echo "docker 2" | curl --data-binary @- http://localhost:9091/metrics/job/netolo
 
 
 
-```
+
 sudo docker pull grafana/grafana
 mkdir grafana
-nano grafana/custom.ini
-nano docker-compose.grafana.yml
-```
-[custom.ini](https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/custom.ini)  
-[docker-compose.grafana.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/docker-compose.grafana.yml)
-```
+nano grafana/custom.ini [custom.ini](https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/custom.ini)
+nano docker-compose.grafana.yml [docker-compose.grafana.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/grafana/docker-compose.grafana.yml)
 sudo docker compose -f docker-compose.yml -f docker-compose.pushgateway.yml -f docker-compose.grafana.yml up -d
 sudo docker compose ps
-```
+
 
 
 # Задание 6
