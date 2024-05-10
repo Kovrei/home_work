@@ -115,6 +115,13 @@ sudo docker compose ps
 Настройте режимы перезапуска для контейнеров.
 Настройте использование контейнерами одной сети.
 Запустите сценарий в detached режиме.
+```
+sudo docker compose up -d
+```
+[doker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/docker-compose.yml)
+```
+sudo doker compose ps
+```
 
 
 # Задание 7
