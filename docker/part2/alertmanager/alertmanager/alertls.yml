@@ -1,6 +1,0 @@
-groups:
-  - name: Netology
-    rules:
-      - alert: Danger
-        expr: docker{job="netology"} > 1
-        for: 10s
