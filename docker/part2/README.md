@@ -121,6 +121,7 @@ sudo docker compose up -d
 [doker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/docker-compose.yml)
 ```
 sudo doker compose ps
+echo "oau 5" | curl --data-binary @- http://158.160.49.40:9091/metrics/job/netology
 ```
 
 
@@ -136,6 +137,9 @@ Cоздайте Data Source Prometheus (Home -> Connections -> Data sources -> A
 docker-compose.yml целиком;
 скриншот команды docker ps после запуске docker-compose.yml;
 скриншот графика, постоенного на основе вашей метрики.
+
+```
+sudo docker compose up -d
 ```
 [doker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/docker-compose.yml)
 ```
