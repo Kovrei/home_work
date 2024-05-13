@@ -136,7 +136,11 @@ Cоздайте Data Source Prometheus (Home -> Connections -> Data sources -> A
 docker-compose.yml целиком;
 скриншот команды docker ps после запуске docker-compose.yml;
 скриншот графика, постоенного на основе вашей метрики.
-Задание 8
+```
+[doker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/docker-compose.yml)
+```
+
+# Задание 8
 Выполните действия:
 
 Остановите и удалите все контейнеры одной командой.
@@ -159,6 +163,14 @@ sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -
 Обеспечьте внешний доступ к порту 9093 c докер-сервера.
 В качестве решения приложите скриншот с событием из Alertmanager.
 
+```
+sudo docker compose up -d
+```
+[doker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/alertmanager/docker-compose.alertmanager.yml)
+```
+sudo doker compose ps
+```
+
 # Задание 10*
 Запустите свой сценарий на чистом железе без предзагруженных образов.
 
@@ -166,3 +178,12 @@ sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -
 
 Опишите выполненный вами процесс развертывания сценария.
 Как вы думаете зачем может понадобиться такой способ развертывания?
+
+```
+sudo docker compose up -d
+```
+[doker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/docker-compose.all.yml)
+```
+sudo doker compose ps
+```
+
