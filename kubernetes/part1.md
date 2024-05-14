@@ -71,18 +71,93 @@ redis должен запускаться без пароля;
 версия образа redis должна быть зафиксирована на 6.0.13.  
 Запустите Deployment в своём кластере и добейтесь его стабильной работы.  
 ```
+nano redis.yml
+```
+```
+piVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: master
+        image: bitnami/redis:6.0.13
+        env:
+         #- name: REDIS_PASSWORD
+         #  value: password123
+         - name: MASTER
+           value: "true"
+        ports:
+        - containerPort: 6379
+```
 kubectl apply -f redis.yml
+
 kubectl get po
-kubectl describe pod <pod-name>
-kubectl get nod
+kubectl get po -w
+
+kubectl get nodes
 kubectl get deploy
 kubectl get rs
+kubectl describe pod <pod-name>
+kubectl get svc
 
 kubectl expose deploy/redis --port 6379
-kubectl get svc
-kubectl run --rm -it redis --image=curlimages/curl -- sh
-curl redis
-curl redis -I
+
+kubectl exec -it <pod-name> -- redis-cli -a 'password123'
+
+127.0.0.1:6379> ping
+PONG
+127.0.0.1:6379> 
+
+```
+```
+piVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+spec:
+  selector:
+    matchLabels:
+      app: redis
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: master
+        image: bitnami/redis:6.0.13
+        env:
+         #- name: REDIS_PASSWORD
+         #  value: password123
+         - name: MASTER
+           value: "true"
+        ports:
+        - containerPort: 6379
+```
+
+kubectl apply -f redis.yml
+
+kubectl get po
+kubectl get po -w
+
+kubectl exec -it <pod-name> -- redis-cli
+
+
+
+#kubectl run --rm -it ngninx --image=curlimages/curl -- sh
+#curl nginx
+#curl nginx -I
 
 kubectl logs <pod-name> -f
 
