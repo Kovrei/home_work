@@ -5,6 +5,33 @@
 
 Запустите Kubernetes локально, используя k3s или minikube на свой выбор.  
 Добейтесь стабильной работы всех системных контейнеров.  
+
+[install docker](https://github.com/Kovrei/home_work/blob/main/docker/docker%20install.md)
+```
+#1########### install kubectl https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/
+curl -LO https://dl.k8s.io/release/`curl -LS https://dl.k8s.io/release/stable.txt`/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl /usr/local/bin/kubectl
+kubectl version --client
+### or install kubectl https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/
+sudo apt-get update && sudo apt-get install -y apt-transport-https
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee -a /etc/apt/sources.list.d/kubernetes.list
+sudo apt-get update
+sudo apt-get install -y kubectl
+#2########## install minicube  https://minikube.sigs.k8s.io/docs/start/
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube && rm minikube-linux-amd64
+
+minikube start
+
+kubectl get po -A
+minikube kubectl -- get po -A
+```
+
+
+
 # Задание 2
 Есть файл с деплоем:
 ```java
