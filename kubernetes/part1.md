@@ -97,7 +97,7 @@ PONG
 
 ```
 ```
-piVersion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: redis
@@ -122,7 +122,7 @@ spec:
         ports:
         - containerPort: 6379
 ```
-
+```
 kubectl apply -f redis.yml
 
 kubectl get po
@@ -152,6 +152,7 @@ kubectl logs <pod-name> -f
 kubectl exec --stdin --tty <pod-name> -- /bin/bash
 #kubectl exec -it <pod-name> -- /bin/bash
 ```
+```
 #command shell
 apt-get install -y procps
 ps aux
@@ -167,7 +168,9 @@ kubectl delete deployment redis
 ```
 проброса порта локальной машины в контейнер для отладки.  
 
-
+```
+kubectl port-forward  redis-76554fd456-pxbb5  7963:6379
+```
 
 # Задание 4
 Есть конфигурация nginx:
@@ -184,5 +187,66 @@ location / {
 Напишите yaml-файлы для развёртки nginx, в которых будут присутствовать:  
 
 ConfigMap с конфигом nginx;  
+~~~
+nano cm.yml
+~~~
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-conf
+data:
+  config.yaml: |
+    db_host: mysql
+    db_user: root
+```
 Deployment, который бы подключал этот configmap;  
+```
+nano nginx.yml
+```
+```
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.14.2
+        ports:
+          - containerPort: 80
+```
 Ingress, который будет направлять запросы по префиксу /test на наш сервис.  
+```
+nano ingress.yml
+```
+```
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+
+spec:
+  rules:
+  - http:
+    paths:
+    - path: /testpath
+      pathType: Prefix
+      backend:
+        service:
+        name: nginx
+        port:
+          number: 80
+```
