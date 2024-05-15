@@ -6,6 +6,8 @@
 Запустите Kubernetes локально, используя k3s или minikube на свой выбор.  
 Добейтесь стабильной работы всех системных контейнеров.  
 
+[шпаргалка команд](https://kubernetes.io/ru/docs/reference/kubectl/cheatsheet/)
+
 [install docker](https://github.com/Kovrei/home_work/blob/main/docker/docker%20install.md)
 ```
 #
@@ -74,31 +76,6 @@ redis должен запускаться без пароля;
 nano redis.yml
 ```
 ```
-piVersion: apps/v1
-kind: Deployment
-metadata:
-  name: redis
-spec:
-  selector:
-    matchLabels:
-      app: redis
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: redis
-    spec:
-      containers:
-      - name: master
-        image: bitnami/redis:6.0.13
-        env:
-         #- name: REDIS_PASSWORD
-         #  value: password123
-         - name: MASTER
-           value: "true"
-        ports:
-        - containerPort: 6379
-```
 kubectl apply -f redis.yml
 
 kubectl get po
@@ -136,7 +113,7 @@ spec:
     spec:
       containers:
       - name: master
-        image: bitnami/redis:6.0.13
+        image: redis:6.0.13
         env:
          #- name: REDIS_PASSWORD
          #  value: password123
@@ -153,14 +130,16 @@ kubectl get po -w
 
 kubectl exec -it <pod-name> -- redis-cli
 
+127.0.0.1:6379> ping
+PONG
+127.0.0.1:6379> 
 
-
+kubectl logs <pod-name> -f
+```
+```
 #kubectl run --rm -it ngninx --image=curlimages/curl -- sh
 #curl nginx
 #curl nginx -I
-
-kubectl logs <pod-name> -f
-
 ```
 
 
@@ -168,10 +147,28 @@ kubectl logs <pod-name> -f
 Выполните действия:  
 
 Напишите команды kubectl для контейнера из предыдущего задания:  
-выполнения команды ps aux внутри контейнера;  
+выполнения команды ps aux внутри контейнера;
+```
+kubectl exec --stdin --tty <pod-name> -- /bin/bash
+#kubectl exec -it <pod-name> -- /bin/bash
+```
+#command shell
+apt-get install -y procps
+ps aux
+ps aux | grep redis
+```
 просмотра логов контейнера за последние 5 минут;  
+```
+kubectl logs --since=5m redis-d96568758-4wdl5
+```
 удаления контейнера;  
+```
+kubectl delete deployment redis
+```
 проброса порта локальной машины в контейнер для отладки.  
+
+
+
 # Задание 4
 Есть конфигурация nginx:
 
