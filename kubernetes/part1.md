@@ -197,8 +197,12 @@ metadata:
   name: backend-conf
 data:
   config.yaml: |
-    db_host: mysql
-    db_user: root
+location / {
+    add_header Content-Type text/plain;
+    return 200 'Hello from k8s';
+}
+    #db_host: mysql
+    #db_user: root
 ```
 Deployment, который бы подключал этот configmap;  
 ```
