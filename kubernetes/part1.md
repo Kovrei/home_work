@@ -87,7 +87,7 @@ kubectl get rs
 kubectl describe pod <pod-name>
 kubectl get svc
 
-kubectl expose deploy/redis --port 6379
+#kubectl expose deploy/redis --port 6379
 
 kubectl exec -it <pod-name> -- redis-cli -a 'password123'
 
@@ -135,11 +135,6 @@ PONG
 127.0.0.1:6379> 
 
 kubectl logs <pod-name> -f
-```
-```
-#kubectl run --rm -it ngninx --image=curlimages/curl -- sh
-#curl nginx
-#curl nginx -I
 ```
 
 
@@ -197,10 +192,10 @@ metadata:
   name: backend-conf
 data:
   config.yaml: |
-location / {
-    add_header Content-Type text/plain;
-    return 200 'Hello from k8s';
-}
+    location / {
+        add_header Content-Type text/plain;
+        return 200 'Hello from k8s';
+    }
     #db_host: mysql
     #db_user: root
 ```
@@ -256,3 +251,23 @@ spec:
             port:
               number: 80
 ```
+kubectl apply -f 
+
+kubectl get po
+kubectl get rs
+
+kubectl get svc
+kubectl expose deploy/nginx-deployment --port 80
+kubectl get svc
+kubectl get ep
+kubectl get po -o wide
+```
+```
+```
+kubectl run --rm -it ngninx --image=curlimages/curl -- sh
+curl nginx-deployment
+curl nginx-deployment -I
+
+kubectl logs nginx-deployment-77d8468669-czhfv
+```
+
