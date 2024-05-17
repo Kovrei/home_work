@@ -270,4 +270,10 @@ curl nginx-deployment -I
 
 kubectl logs nginx-deployment-77d8468669-czhfv
 ```
+```
+minikube addons list
+minikube addons enable ingress
+
+
+
 
