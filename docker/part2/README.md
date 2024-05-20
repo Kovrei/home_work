@@ -50,7 +50,7 @@ nano docker-compose.yml
 ```
 [docker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/prometheus/docker-compose.prometheus.yml)
 ```
-mkdir -p ./{prometheus,grafana,pushgateway}  
+mkdir -p ./{prometheus,grafana,alertmanager}  
 nano prometheus/prometheus.yml
 ```
 [prometheus.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/prometheus/prometheus.yml)
