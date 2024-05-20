@@ -143,7 +143,8 @@ sudo docker compose up -d
 ```
 [doker-compose.yml](https://github.com/Kovrei/home_work/blob/main/docker/part2/docker-compose.yml)
 ```
-echo "oau 5" | curl --data-binary @- http://158.160.49.40:9091/metrics/job/netology
+echo "oau 5" | curl --data-binary @- http://localhost:9091/metrics/job/netology
+history | grep 9091
 ```
 
 # Задание 8
