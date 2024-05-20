@@ -154,7 +154,7 @@ history | grep 9091
 В качестве решения приложите скриншот консоли с проделанными действиями.
 
 ```
-sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -q) && sudo docker rmi $(sudo docker ps -a -q)
+sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -q) && sudo docker rmi $(sudo docker ps -a -q) && docker rmi $(docker images)
 ```
 
 
