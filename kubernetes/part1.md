@@ -251,6 +251,7 @@ spec:
             port:
               number: 80
 ```
+```
 kubectl apply -f 
 
 kubectl get po
@@ -261,8 +262,10 @@ kubectl expose deploy/nginx-deployment --port 80
 kubectl get svc
 kubectl get ep
 kubectl get po -o wide
+kubectl port-forward nginx-deployment-77d8468669-2mps2 8080:80
+http:/localhost:8080
 ```
-```
+
 ```
 kubectl run --rm -it ngninx --image=curlimages/curl -- sh
 curl nginx-deployment
@@ -273,7 +276,7 @@ kubectl logs nginx-deployment-77d8468669-czhfv
 ```
 minikube addons list
 minikube addons enable ingress
-
+```
 
 
 
