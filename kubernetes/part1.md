@@ -277,6 +277,10 @@ kubectl logs nginx-deployment-77d8468669-czhfv
 minikube addons list
 minikube addons enable ingress
 ```
+Error from server (InternalError): error when creating "nginx.yml": Internal error occurred: failed calling webhook "validate.nginx.ingress.kubernetes.io": failed to call webhook: Post "https://ingress-nginx-controller-admission.ingress-nginx.svc:443/networking/v1/ingresses?timeout=10s": tls: failed to verify certificate: x509: certificate signed by unknown authority
+```
+kubectl delete -A validatingWebhookConfiguration ingress-nginx-admission
+```
 
 
 
