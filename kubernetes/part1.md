@@ -289,6 +289,8 @@ http:/localhost:8080
 
 ```
 kubectl run --rm -it ngninx --image=curlimages/curl -- sh
+###или
+kubectl exec -it nginx-deployment-77d8468669-czhfv -- bash
 curl nginx-deployment
 curl nginx-deployment -I
 
