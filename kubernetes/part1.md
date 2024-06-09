@@ -157,7 +157,7 @@ ps aux | grep redis
 ```
 kubectl logs --since=5m redis-d96568758-4wdl5
 ```
-удаления контейнера;  
+[удаления контейнера](https://kubernetes.io/docs/reference/kubectl/generated/kubectl_delete/);  
 ```
 kubectl delete deployment redis
 ```
@@ -189,15 +189,17 @@ nano cm.yml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: backend-conf
+  name: nginx-cm
 data:
-  config.yaml: |
-    location / {
-        add_header Content-Type text/plain;
-        return 200 'Hello from k8s';
-    }
-    #db_host: mysql
-    #db_user: root
+  default.conf: |
+        server {
+            listen       80 default_server;
+            server_name _;
+            location / {
+              add_header Content-Type text/plain;
+              return 200 'Hello from k8s';
+            }
+        }
 ```
 Deployment, который бы подключал этот configmap;  
 ```
@@ -208,14 +210,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
-  labels:
-    app: nginx
-
 spec:
-  replicas: 3
   selector:
     matchLabels:
       app: nginx
+  replicas: 1
   template:
     metadata:
       labels:
@@ -223,9 +222,33 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: nginx:1.14.2
+        image: nginx
         ports:
-          - containerPort: 80
+        - containerPort: 80
+        volumeMounts:
+            - name: nginx-cm
+              mountPath: /etc/nginx/conf.d/
+      volumes:
+      - name: nginx-cm
+        configMap:
+          name: nginx-cm
+```
+```
+nano svc.yml
+```
+```
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-svc
+spec:
+  ports:
+    - name: nginx-tcp
+      protocol: TCP
+      port: 80
+      targetPort: 80
+  selector:
+    app: nginx-deployment
 ```
 Ingress, который будет направлять запросы по префиксу /test на наш сервис.  
 ```
@@ -235,19 +258,19 @@ nano ingress.yml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: minimal-ingress
+  name: nginx-ingress
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx-example
   rules:
-  - http:
+  - host: my-test.ups
+    http: 
       paths:
-      - path: /testpath
+      - path: /test
         pathType: Prefix
         backend:
           service:
-            name: nginx
+            name: nginx-svc
             port:
               number: 80
 ```
@@ -262,7 +285,7 @@ kubectl expose deploy/nginx-deployment --port 80
 kubectl get svc
 kubectl get ep
 kubectl get po -o wide
-kubectl port-forward nginx-deployment-77d8468669-2mps2 8080:80
+kubectl port-forward nginx-deployment-77d8468669-2mps2 8080:80 &
 http:/localhost:8080
 ```
 
@@ -281,6 +304,8 @@ Error from server (InternalError): error when creating "nginx.yml": Internal err
 ```
 kubectl delete -A validatingWebhookConfiguration ingress-nginx-admission
 ```
-
+```
+curl my-test.ups
+```
 
 
