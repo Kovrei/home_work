@@ -30,7 +30,6 @@ ALTER USER 'sys_test'@'localhost' IDENTIFIED WITH mysql_native_password BY 'pass
 *Результатом работы должны быть скриншоты обозначенных заданий, а также простыня со всеми запросами.*
 
 ## Решение
-### Задание 1  
 Скрин к заданию 1.3    
 
 ![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/03-db/img/12-02-1-1.PNG?raw=true)
@@ -56,8 +55,6 @@ ALTER USER 'sys_test'@'localhost' IDENTIFIED WITH mysql_native_password BY 'pass
 customer         | customer_id
 ```
 ## Решение
-### Задание 2
-
 Скрин к заданию 2  
 
 ![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/03-db/img/12-02-2-1.PNG?raw=true)
