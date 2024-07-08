@@ -30,16 +30,16 @@ ALTER USER 'sys_test'@'localhost' IDENTIFIED WITH mysql_native_password BY 'pass
 *Результатом работы должны быть скриншоты обозначенных заданий, а также простыня со всеми запросами.*
 
 ## Решение
-### Задание 1
-Скрин к заданию 1.3  
+### Задание 1  
+Скрин к заданию 1.3    
 ![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/03-db/img/12-02-1-1.PNG?raw=true)
 Скрин к заданию 1.5  
 ![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/03-db/img/12-02-1-2.PNG?raw=true)
-Скрин к заданию 1.6. Возник вопрос при выполнении задания. Были предприняты алгоритмы:
-- ставил MySQL (old). Результат такой же
-- нашел в свойствах драйвера при настройки подключения MySQL "defaultAuthenticationPlugin" и по умолчанию стоит mysql_native_password  
+Скрин к заданию 1.6. Возник вопрос при выполнении задания. Были предприняты алгоритмы: 
+- ставил MySQL (old). Результат такой же  
+- нашел в свойствах драйвера при настройки подключения MySQL "defaultAuthenticationPlugin" и по умолчанию стоит mysql_native_password   
 ![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/03-db/img/12-02-1-3.PNG?raw=true)
-Скрин к заданию 1.8
+Скрин к заданию 1.8  
 ![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/03-db/img/12-02-1-4.PNG?raw=true)
 
 ### Задание 2
@@ -50,7 +50,7 @@ customer         | customer_id
 ```
 ## Решение
 ### Задание 2
-Скрин к заданию 2
+Скрин к заданию 2  
 ![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/03-db/img/12-02-2-1.PNG?raw=true)
 ![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/03-db/img/12-02-2-2.PNG?raw=true)
 ## Дополнительные задания (со звёздочкой*)
@@ -63,5 +63,5 @@ customer         | customer_id
 *Результатом работы должны быть скриншоты обозначенных заданий, а также простыня со всеми запросами.*
 
 ## Решение
-### Задание 3*
+Скрин к заданию 4  
 ![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/03-db/img/12-02-3-1.PNG?raw=true)
