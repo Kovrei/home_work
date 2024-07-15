@@ -17,8 +17,10 @@ and district not like '% %'
 
 ### ответ
 ```mysql
-select amount, payment_date from payment
-where payment_date between '2005-06-15' and '2005-06-19'
+select amount,cast(payment_date as date) 
+from payment
+where payment_date 
+between '2005-06-15' and '2005-06-19'
 and amount > 10
 order by payment_date asc 
 ```
@@ -70,11 +72,16 @@ from customer c
 Доработайте запрос из предыдущего задания, скорректируйте значения в новых колонках: первая буква должна быть заглавной, остальные — строчными.
 
 ### ответ
-**Прошу помочь в данном задании, битые часы ломаю систему без успешно**
 ```mysql
-select concat(upper(left(email,1)),lower(substr(email,2))),
-concat(upper(left(email,1)),lower(substring_index(email,'@',1))),
-from customer c 
+select
+	CONCAT(
+		LEFT(UPPER(SUBSTRING_INDEX(c.email, '@', 1)), 1), 
+		SUBSTRING(LOWER(SUBSTRING_INDEX(c.email, '@', 1)), 2)
+	) as "left",
+	CONCAT(
+		LEFT(UPPER(SUBSTRING_INDEX(c.email, '@', -1)), 1), 
+		SUBSTRING(LOWER(SUBSTRING_INDEX(c.email, '@', -1)), 2)
+	) as "right"
+from
+	sakila.customer c;
 ```
-### результат
-![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/04-db/img/12-03-6.PNG?raw=true)
