@@ -25,6 +25,8 @@ and amount > 10
 order by payment_date asc 
 ```
 
+![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/04-db/img/12-03-02.PNG?raw=true)
+
 ### Задание 3
 
 Получите последние пять аренд фильмов.
