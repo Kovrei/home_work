@@ -17,15 +17,12 @@ and district not like '% %'
 
 ### ответ
 ```mysql
-select amount,cast(payment_date as date) 
+select amount, cast(payment_date as date) as payment_date 
 from payment
-where payment_date 
-between '2005-06-15' and '2005-06-19'
+where cast(payment_date as date) between '2005-06-15' and '2005-06-18'
 and amount > 10
-order by payment_date asc 
+order by payment_date asc
 ```
-
-![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/04-db/img/12-03-02.PNG?raw=true)
 
 ### Задание 3
 
