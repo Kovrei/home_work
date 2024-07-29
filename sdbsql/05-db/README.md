@@ -24,14 +24,18 @@ HAVING COUNT(c.store_id) > 300
 
 Получите количество фильмов, продолжительность которых больше средней продолжительности всех фильмов.
 
-### ответ (среднюю продолжительность могу выразить ввиде цифр полученных из команды avg и вставить в запрос Having.   
-Думаю , что такое решение будет ложным. Прошу намекнуть на правильность действий)
+### ответ 
 
 ```mysql
 select title, `length` 
-from film f 
-group by film_id 
-having avg(`length`) > `length` 
+from film 
+where `length` > (select avg(`length`) from film)
+```
+```mysql
+select title, `length` , avg_lenght.avg_lenght
+from film 
+cross join (select avg(`length`) avg_lenght from film f) avg_lenght
+where `length` > avg_lenght.avg_lenght
 ```
 ### Задание 3
 
@@ -40,9 +44,9 @@ having avg(`length`) > `length`
 ### ответ
 
 ```mysql
-select monthname(payment_date) as month, count(payment_id) as payment, sum(amount) as sum
+select date_format(payment_date, '%W %M %Y') as date, count(payment_id) as payment, sum(amount) as sum
 from payment p 
-group by monthname(payment_date)
+group by date_format(payment_date, '%W %M %Y')
 order by sum(amount) desc limit 1
 ```
 
@@ -70,17 +74,6 @@ group by s.staff_id
 
 Найдите фильмы, которые ни разу не брали в аренду.
 
-### вопрос
-Изначально была логика, что ориентир это дата аренды (а именно null). В ходе поиска решений стала интресна стоимость. Отсюда вывел такой запрос.   
-Ответ найден (см.ниже) из презентации. И все же интересно решить задание, исходя из первоначального рассуждения. Есть ли шанс выполнить задание применяя данный запрос?
-
-```mysql
-SELECT f.title, r.rental_date, p.amount
-from rental r 
-left join inventory i on i.inventory_id = r.inventory_id 
-left join film f on i.film_id = f.film_id
-left join payment p on p.payment_id = r.rental_id 
-```
 ### ответ
 
 ```mysql
