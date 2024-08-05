@@ -30,13 +30,13 @@ where date(p.payment_date) = '2005-07-30' and p.payment_date = r.rental_date and
 
 ### Решение 2
 
-- перечислите узкие места;
-**Анализ команды explain analyze показал, что при запросе команды sum(payment.amount) OVER (PARTITION BY c.customer_id,f.title ) время (actual time) = 5058..8821. Это и есть узкое место для общего запроса**
+- перечислите узкие места;  
+**Анализ команды explain analyze показал, что при запросе команды sum(payment.amount) OVER (PARTITION BY c.customer_id,f.title ) время (actual time) = 5058..8821. Это и есть узкое место для общего запроса**  
 -> Window aggregate with buffering: sum(payment.amount) OVER (PARTITION BY c.customer_id,f.title )   (actual time=5058..8821 rows=642000 loops=1)  
 -> Sort: c.customer_id, f.title  (actual time=5058..5153 rows=642000 loops=1)  
   
-- оптимизируйте запрос: внесите корректировки по использованию операторов, при необходимости добавьте индексы.
-**К сожалению ниже представленное решение по оптимизации запросов искажает информацию, других решений у меня нет**
+- оптимизируйте запрос: внесите корректировки по использованию операторов, при необходимости добавьте индексы.  
+**К сожалению ниже представленное решение по оптимизации запросов искажает информацию, других решений у меня нет**  
 ```mysql
 select distinct concat(c.last_name, ' ', c.first_name), sum(p.amount) over (partition by c.customer_id, f.title)
 from payment p
