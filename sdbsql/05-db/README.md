@@ -38,14 +38,16 @@ where date(p.payment_date) = '2005-07-30' and p.payment_date = r.rental_date and
 - оптимизируйте запрос: внесите корректировки по использованию операторов, при необходимости добавьте индексы.  
 **К сожалению ниже представленное решение по оптимизации запросов искажает информацию, других решений у меня нет**  
 ```mysql
+explain analyze
 select distinct concat(c.last_name, ' ', c.first_name), sum(p.amount) over (partition by c.customer_id, f.title)
 from payment p
 join rental r on p.payment_date = r.rental_date
 join customer c on c.customer_id = r.customer_id 
 join inventory i on i.inventory_id = r.inventory_id 
 join film f on f.film_id = i.inventory_id 
-where date(p.payment_date) = '2005-07-30'
+where payment_date >= '2005-07-30' and payment_date < DATE_ADD('2005-07-30', INTERVAL 1 DAY)
 ```
+![alt text](https://github.com/Kovrei/home_work/blob/main/sdbsql/05-db/img/12-05-1.PNG?raw=true)
 
 ## Дополнительные задания (со звёздочкой*)
 Эти задания дополнительные, то есть не обязательные к выполнению, и никак не повлияют на получение вами зачёта по этому домашнему заданию. Вы можете их выполнить, если хотите глубже шире разобраться в материале.
