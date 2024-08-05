@@ -36,7 +36,7 @@ where date(p.payment_date) = '2005-07-30' and p.payment_date = r.rental_date and
 -> Sort: c.customer_id, f.title  (actual time=5058..5153 rows=642000 loops=1)  
   
 - оптимизируйте запрос: внесите корректировки по использованию операторов, при необходимости добавьте индексы.  
-**К сожалению ниже представленное решение по оптимизации запросов искажает информацию, других решений у меня нет**  
+
 ```mysql
 explain analyze
 select distinct concat(c.last_name, ' ', c.first_name), sum(p.amount) over (partition by c.customer_id, f.title)
