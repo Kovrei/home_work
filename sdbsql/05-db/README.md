@@ -30,7 +30,8 @@ where date(p.payment_date) = '2005-07-30' and p.payment_date = r.rental_date and
 
 ### Решение 2
 
-- перечислите узкие места;  
+- перечислите узкие места;
+  
 **Анализ команды explain analyze показал, что при запросе команды sum(payment.amount) OVER (PARTITION BY c.customer_id,f.title ) время (actual time) = 5058..8821. Это и есть узкое место для общего запроса**  
 -> Window aggregate with buffering: sum(payment.amount) OVER (PARTITION BY c.customer_id,f.title )   (actual time=5058..8821 rows=642000 loops=1)  
 -> Sort: c.customer_id, f.title  (actual time=5058..5153 rows=642000 loops=1)  
