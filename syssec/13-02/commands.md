@@ -45,4 +45,19 @@ sudo cryptsetup luksClose disk
 ```
 sudo cryptsetup luksClose disk
 ```
-
+## Решение 3
+```
+sudo apt install apparmor-profiles apparmor-utils apparmor-profiles-extra
+reboot
+sudo apparmor_status
+```
+Пример:  
+```
+ls /etc/apparmor.d/
+sudo cp /usr/bin/man /usr/bin/man1
+sudo cp /bin/ping /usr/bin/man
+sudo man 127.0.0.1
+sudo aa-enforce man
+sudo man 127.0.0.1
+```
+```
