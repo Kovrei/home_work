@@ -11,7 +11,7 @@
 *В качестве ответа  пришлите снимки экрана домашнего каталога пользователя с исходными и зашифрованными данными.*  
 
 ### Решение 1
-
+![alt text](https://github.com/Kovrei/home_work/blob/main/syssec/13-02/img/13-01-1.PNG?raw=true)
 ### Задание 2
 
 1. Установите поддержку **LUKS**.
@@ -21,8 +21,9 @@
 *В качестве ответа пришлите снимки экрана с поэтапным выполнением задания.*
 
 ### Решение 2
-
-
+![alt text](https://github.com/Kovrei/home_work/blob/main/syssec/13-02/img/13-02-1.PNG?raw=true)
+![alt text](https://github.com/Kovrei/home_work/blob/main/syssec/13-02/img/13-02-2.PNG?raw=true)
+![alt text](![image](https://github.com/user-attachments/assets/864a357d-62ea-4a5f-ac3f-c0ce6d593b1b)
 ## Дополнительные задания (со звёздочкой*)
 
 Эти задания дополнительные, то есть не обязательные к выполнению, и никак не повлияют на получение вами зачёта по этому домашнему заданию. Вы можете их выполнить, если хотите глубже шире разобраться в материале
@@ -37,3 +38,8 @@
 *В качестве ответа пришлите снимки экрана с поэтапным выполнением задания.*
 
 ### Решение 3
+![alt text](https://github.com/Kovrei/home_work/blob/main/syssec/13-02/img/13-03-1.PNG?raw=true)
+
+**После команды sudo service apparmor stop статус сервиса inactive, но применяя команду sudo man localhost выходит запрет. За то после перезагрузки reboot (даже если статус apparmor active), команда sudo man localhost срабатывает, как будто все было отключено** 
+![alt text](https://github.com/Kovrei/home_work/blob/main/syssec/13-02/img/13-03-2.PNG?raw=true)
+
