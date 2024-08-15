@@ -41,5 +41,6 @@
 ![alt text](https://github.com/Kovrei/home_work/blob/main/syssec/13-02/img/13-03-1.PNG?raw=true)
 
 **После команды sudo service apparmor stop статус сервиса inactive, но применяя команду sudo man localhost выходит запрет. За то после перезагрузки reboot (даже если статус apparmor active), команда sudo man localhost срабатывает, как будто все было отключено** 
+
 ![alt text](https://github.com/Kovrei/home_work/blob/main/syssec/13-02/img/13-03-2.PNG?raw=true)
 
